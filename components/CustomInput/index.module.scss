@@ -1,0 +1,18 @@
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  .label {
+
+  }
+
+  .input {
+    max-width: 500px;
+    padding: 4px;
+  }
+
+  .error {
+
+  }
+}
