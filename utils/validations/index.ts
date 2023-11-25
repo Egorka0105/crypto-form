@@ -12,6 +12,10 @@ export const telegram_channel_schema: any = yup.string().required('Field is requ
 
 export const password_schema: any = yup.string().required('Field is required');
 
+export const trader_first_step_schema: any = yup.object().shape({
+  recipient: email_schema,
+});
+
 export const trader_schema: any = yup.object().shape({
   [FIELD_NAMES.FULL_NAME]: fullName_schema,
   [FIELD_NAMES.EMAIL]: email_schema,
