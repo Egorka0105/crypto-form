@@ -3,9 +3,9 @@
 import { Formik, Form } from 'formik';
 import { CustomInput } from '@/components/CustomInput';
 import { FIELD_NAMES } from '@/utils/variables';
-import { admin_schema } from '@/utils/validations';
+import { support_schema } from '@/utils/validations';
 
-const initAdminValues = {
+const initSupportValues = {
   [FIELD_NAMES.FULL_NAME]: '',
   [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.TG_CHANNEL_NAME]: '',
@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <div>
-      <Formik initialValues={initAdminValues} onSubmit={handleSubmit} validationSchema={admin_schema}>
+      <Formik initialValues={initSupportValues} onSubmit={handleSubmit} validationSchema={support_schema}>
         <Form>
           <CustomInput
             label={'Name'}
