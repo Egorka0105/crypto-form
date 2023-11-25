@@ -10,6 +10,7 @@ const initTraderValues = {
   [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.TG_CHANNEL_NAME]: '',
   [FIELD_NAMES.PASSWORD]: '',
+  [FIELD_NAMES.CONFIRM_PASSWORD]: '',
 };
 
 export default function Page() {
