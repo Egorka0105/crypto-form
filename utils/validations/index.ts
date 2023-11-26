@@ -37,3 +37,8 @@ export const support_schema: any = yup.object().shape({
   [FIELD_NAMES.PASSWORD]: password_schema,
   [FIELD_NAMES.CONFIRM_PASSWORD]: password_schema,
 });
+
+export const login_schema: any = yup.object().shape({
+  [FIELD_NAMES.EMAIL]: email_schema,
+  [FIELD_NAMES.PASSWORD]: password_schema,
+})
