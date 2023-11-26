@@ -5,16 +5,16 @@ import { Form, Formik } from 'formik';
 import { FIELD_NAMES } from '@/utils/variables';
 import { login_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
-import styles from "./index.module.scss"
-import axios from "axios";
-import {useRouter} from "next/navigation";
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import styles from './index.module.scss';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.PASSWORD]: '',
 };
 
-const post_link = "https://cryptobot-5rf4.onrender.com/crypto/enter/sign-in"
+const post_link = 'https://cryptobot-5rf4.onrender.com/crypto/enter/sign-in';
 
 export const LoginForm: FC = () => {
   const router = useRouter();
@@ -45,7 +45,9 @@ export const LoginForm: FC = () => {
           field_Name={FIELD_NAMES.PASSWORD}
         />
 
-        <button className={styles.submit} type={'submit'}>submit</button>
+        <button className={styles.submit} type={'submit'}>
+          submit
+        </button>
       </Form>
     </Formik>
   );
