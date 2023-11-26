@@ -4,18 +4,28 @@ import { Formik, Form } from 'formik';
 import { CustomInput } from '@/components/CustomInput';
 import { FIELD_NAMES } from '@/utils/variables';
 import { support_schema } from '@/utils/validations';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const initSupportValues = {
   [FIELD_NAMES.FULL_NAME]: '',
   [FIELD_NAMES.EMAIL]: '',
-  [FIELD_NAMES.TG_CHANNEL_NAME]: '',
   [FIELD_NAMES.PASSWORD]: '',
   [FIELD_NAMES.CONFIRM_PASSWORD]: '',
 };
 
+const post_link = 'https://cryptobot-5rf4.onrender.com/crypto/enter/sign-up/support';
+
 export default function Page() {
-  const handleSubmit = (value: any) => {
-    console.log(value);
+  const router = useRouter();
+
+  const handleSubmit = async (value: any) => {
+    try {
+      const { status } = await axios.post(post_link, value);
+      if (status === 200) router.push('/login');
+    } catch (e: Error | any) {
+      await Promise.reject(e);
+    }
   };
 
   return (

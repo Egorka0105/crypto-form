@@ -3,5 +3,5 @@ export const FIELD_NAMES = {
   EMAIL: 'email',
   PASSWORD: 'password',
   CONFIRM_PASSWORD: 'confirm-password',
-  TG_CHANNEL_NAME: 'tg-channel-name',
+  TG_CHANNEL_NAME: 'telegramChannelName',
 };
