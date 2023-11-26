@@ -1,1 +1,1 @@
-export const config = { matcher: ['/profile'] };
+export const config = { matcher: ['/profile1'] };
