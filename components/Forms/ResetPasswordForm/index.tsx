@@ -1,26 +1,25 @@
 'use client';
 
 import { FC } from 'react';
-import { Form, Formik } from 'formik';
-import { AUTH_URL, FIELD_NAMES } from '@/utils/variables';
-import { login_schema } from '@/utils/validations';
-import { CustomInput } from '@/components/CustomInput';
-import { ForgotPassword } from '@/components/Modals';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
+import { Formik, Form } from 'formik';
+import { AUTH_URL, FIELD_NAMES } from '@/utils/variables';
+import { useRouter } from 'next/navigation';
+import { reset_password_schema } from '@/utils/validations';
+import { CustomInput } from '@/components/CustomInput';
+import axios from 'axios';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.PASSWORD]: '',
 };
 
-export const LoginForm: FC = () => {
+export const ResetPasswordForm: FC = () => {
   const router = useRouter();
 
   const handleSubmit = async (values: any) => {
     try {
-      const { status } = await axios.post(AUTH_URL.LOGIN, values);
+      const { status } = await axios.post(AUTH_URL.RESET, values);
       if (status === 200) router.push('/profile');
     } catch (e: Error | any) {
       await Promise.reject(e);
@@ -28,7 +27,7 @@ export const LoginForm: FC = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={login_schema}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={reset_password_schema}>
       <Form className={styles.login_form}>
         <CustomInput
           label={'Email'}
@@ -44,10 +43,8 @@ export const LoginForm: FC = () => {
           field_Name={FIELD_NAMES.PASSWORD}
         />
 
-        <ForgotPassword />
-
         <button className={styles.submit} type={'submit'}>
-          submit
+          Confirm
         </button>
       </Form>
     </Formik>

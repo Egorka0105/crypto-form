@@ -1,10 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { CustomInput } from '@/components/CustomInput';
 import { trader_first_step_schema, trader_schema } from '@/utils/validations';
 import axios from 'axios';
-import { useState } from 'react';
 
 const initTraderValues = {
   recipient: '',
