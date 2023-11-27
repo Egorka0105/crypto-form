@@ -16,3 +16,9 @@ body {
   font-style: normal;
   background: #ddd
 }
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -1,17 +1,25 @@
-import { FC, useState } from 'react';
-import { useModal } from '@/utils/helpers/use-modal';
+'use client';
 
+import { useModal } from '@/utils/helpers/use-modal';
+import { CustomModal } from '@/components/CustomModal';
+import { ForgotPasswordForm } from '@/components/Forms/ForgotPasswordForm';
 import styles from './index.module.scss';
 
-export const ForgotPassword: FC = () => {
-  const [email, setEmail] = useState('');
-  const [error, serError] = useState('');
 
+export const ForgotPassword = () => {
   const [isOpen, handleModalOpen, handleModalClose] = useModal();
 
   return (
     <>
-      <span className={styles.forgot_link} onClick={handleModalOpen}>Forgot Password?</span>
+      <button type={'button'} className={styles.forgot_link} onClick={handleModalOpen}>
+        Forgot Password?
+      </button>
+
+      {isOpen && (
+        <CustomModal title={'Forgot password'} onClose={handleModalClose} isOpen={isOpen}>
+          <ForgotPasswordForm />
+        </CustomModal>
+      )}
     </>
   );
 };
