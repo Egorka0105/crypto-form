@@ -17,16 +17,21 @@ export const ResetPasswordForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const paramToken = params.get('token');
+  const accessToken = params.get('token');
 
   const handleSubmit = async (values: any) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
     const reqValue = {
-      token: paramToken,
       newPassword: values[FIELD_NAMES.PASSWORD],
     };
 
     try {
-      const { status } = await axios.post(AUTH_URL.RESET, reqValue);
+      const { status } = await axios.post(AUTH_URL.RESET, reqValue, config);
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
       await Promise.reject(e);

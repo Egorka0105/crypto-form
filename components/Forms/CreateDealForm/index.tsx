@@ -1,4 +1,5 @@
 'use client';
+
 import { Form, Formik } from 'formik';
 import { CustomUploadInput } from '@/components/CustomUploadInput';
 import { CustomTextArea } from '@/components/CustomTextArea';
@@ -22,13 +23,17 @@ export const CreateDealForm = () => {
     const config: AxiosRequestConfig = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        'Content-type': 'multipart/form-data',
       },
     };
     try {
-      const { status } = await axios.post(TRADER_URL.CREATE_DEAL, values, config);
+      const formData = new FormData();
+      formData.append('file', values.file);
+      formData.append('text', values.text);
+      const { status } = await axios.post(TRADER_URL.CREATE_DEAL, formData, config);
       if (status === 200) resetForm();
     } catch (e: any) {
-      if (e.response.status === 401) router.push('/login');
+      if (e.response.status === 403) router.push('/login');
       await Promise.reject(e);
     }
   };
