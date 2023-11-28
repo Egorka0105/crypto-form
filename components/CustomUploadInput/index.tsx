@@ -18,7 +18,7 @@ export const CustomUploadInput: FC<ICustomUploadInput> = ({ label, field_Id, fie
   return (
     <div>
       <label htmlFor={field_Id}>{label}</label>
-      <input id={field_Id} name={field_Name} type={type} accept="image/*" onChange={handleChange} />
+      <input id={field_Id} name={field_Name} type={type} accept="image/*" onChange={handleChange} multiple/>
     </div>
   );
 };
