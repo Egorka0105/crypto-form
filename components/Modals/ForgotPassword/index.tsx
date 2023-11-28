@@ -3,8 +3,8 @@
 import { useModal } from '@/utils/helpers/use-modal';
 import { CustomModal } from '@/components/CustomModal';
 import { ForgotPasswordForm } from '@/components/Forms/ForgotPasswordForm';
+import { MOCK_FORGOT_PASSWORD } from '@/utils/variables';
 import styles from './index.module.scss';
-
 
 export const ForgotPassword = () => {
   const [isOpen, handleModalOpen, handleModalClose] = useModal();
@@ -12,7 +12,7 @@ export const ForgotPassword = () => {
   return (
     <>
       <button type={'button'} className={styles.forgot_link} onClick={handleModalOpen}>
-        Forgot Password?
+        {MOCK_FORGOT_PASSWORD.LINK}
       </button>
 
       {isOpen && (

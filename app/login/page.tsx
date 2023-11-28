@@ -1,10 +1,10 @@
 import { LoginForm } from '@/components/Forms/LoginForm';
-import styles from './index.module.scss';
+import { MOCK_LOGIN } from '@/utils/variables';
 
 export default function Login() {
   return (
-    <div className={styles.login_page}>
-      <h2>Login</h2>
+    <div className={"form_container"}>
+      <h4>{MOCK_LOGIN.TITLE}</h4>
       <LoginForm />
     </div>
   );
