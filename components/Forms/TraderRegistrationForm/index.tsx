@@ -20,12 +20,12 @@ export const TraderRegistrationForm = () => {
   const searchParams = useSearchParams();
 
   const params = new URLSearchParams(searchParams);
-  const token = params.get('token');
+  const registrationToken = params.get('token');
 
   const handleSubmit = async (value: any) => {
     const reqValue = {
       telegramChannelName: value[FIELD_NAMES.TG_CHANNEL_NAME],
-      registrationToken: token,
+      registrationToken: registrationToken,
       personDto: {
         password: value[FIELD_NAMES.PASSWORD],
         email: value[FIELD_NAMES.EMAIL],
