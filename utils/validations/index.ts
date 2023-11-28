@@ -29,7 +29,7 @@ export const trader_schema: any = yup.object().shape({
   [FIELD_NAMES.EMAIL]: email_schema,
   [FIELD_NAMES.TG_CHANNEL_NAME]: telegram_channel_schema,
   [FIELD_NAMES.PASSWORD]: password_schema,
-  [FIELD_NAMES.CONFIRM_PASSWORD]: password_schema,
+  [FIELD_NAMES.CONFIRM_PASSWORD]: password_confirm_schema,
 });
 
 export const admin_schema: any = yup.object().shape({
@@ -43,16 +43,12 @@ export const support_schema: any = yup.object().shape({
   [FIELD_NAMES.FULL_NAME]: fullName_schema,
   [FIELD_NAMES.EMAIL]: email_schema,
   [FIELD_NAMES.PASSWORD]: password_schema,
-  [FIELD_NAMES.CONFIRM_PASSWORD]: password_schema,
+  [FIELD_NAMES.CONFIRM_PASSWORD]: password_confirm_schema,
 });
 
 export const login_schema: any = yup.object().shape({
   [FIELD_NAMES.EMAIL]: email_schema,
   [FIELD_NAMES.PASSWORD]: password_schema,
-});
-
-export const forgot_password_schema: any = yup.object().shape({
-  [FIELD_NAMES.EMAIL]: email_schema,
 });
 
 export const reset_password_schema: any = yup.object().shape({
