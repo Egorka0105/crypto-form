@@ -1,9 +1,11 @@
 'use client';
 
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { Field, FormikContextType, useFormikContext } from 'formik';
-import styles from './index.module.scss';
 import { clsx } from 'clsx';
+import { CheckPasswordVisible } from '@/components/CheckPasswordVisible';
+import { FIELD_NAMES, FIELD_TYPES } from '@/utils/variables';
+import styles from './index.module.scss';
 
 interface ICustomInput {
   label: string;
@@ -14,10 +16,15 @@ interface ICustomInput {
 }
 
 export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, field_Name, type = 'text', ...rest }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { errors, setFieldValue }: FormikContextType<any> = useFormikContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setFieldValue(field_Name, e.target.value);
+    setFieldValue(field_Name, e.target.value);
+  };
+
+  const handleIsPasswordVisible = () => {
+    setIsPasswordVisible((prevState) => !prevState);
   };
 
   return (
@@ -26,14 +33,21 @@ export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, fi
         {label}
       </label>
 
-      <Field
-        className={clsx({ error: errors[field_Name] })}
-        name={field_Name}
-        type={type}
-        id={field_Id}
-        placeholder={placeholder}
-        onChange={handleChange}
-      />
+      <div className={styles.field}>
+        <Field
+          className={clsx(styles.input, { error: errors[field_Name] })}
+          name={field_Name}
+          type={!isPasswordVisible ? type : FIELD_TYPES.TEXT}
+          id={field_Id}
+          placeholder={placeholder}
+          onChange={handleChange}
+        />
+
+        {(field_Name === FIELD_NAMES.PASSWORD || field_Name === FIELD_NAMES.CONFIRM_PASSWORD) && (
+          <CheckPasswordVisible toggleVisible={handleIsPasswordVisible} isVisible={isPasswordVisible} />
+        )}
+      </div>
+
       {errors && <span className={'input_error'}>{errors[field_Name] as string}</span>}
     </div>
   );

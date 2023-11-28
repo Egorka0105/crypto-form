@@ -39,7 +39,6 @@ h4 {
     line-height: 32px;
 }
 
-
 button {
     background-color: transparent;
     border: none;
@@ -93,7 +92,7 @@ input::placeholder {
     padding: 0 16px;
 }
 
-.submit_btn{
+.submit_btn {
     max-width: 400px;
     padding: 12px 120px;
     background-color: var(--light-blue);
@@ -106,12 +105,12 @@ input::placeholder {
     transition: ease .5s;
 }
 
-.submit_btn:hover{
+.submit_btn:hover {
     background-color: var(--white);
     color: var(--black);
 }
 
-.submit_btn:disabled{
+.submit_btn:disabled {
     background-color: var(--gray);
     color: var(--white);
     cursor: auto;

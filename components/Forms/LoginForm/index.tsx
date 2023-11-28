@@ -1,14 +1,14 @@
 'use client';
 
 import { Form, Formik } from 'formik';
-import { AUTH_URL, FIELD_NAMES, MOCK_LOGIN } from '@/utils/variables';
+import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_LOGIN } from '@/utils/variables';
 import { login_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import { ForgotPassword } from '@/components/Modals';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import styles from './index.module.scss';
 import { clsx } from 'clsx';
+import styles from './index.module.scss';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
@@ -43,7 +43,7 @@ export const LoginForm = () => {
             placeholder={MOCK_LOGIN.PASSWORD_PLACEHOLDER}
             field_Id={FIELD_NAMES.PASSWORD}
             field_Name={FIELD_NAMES.PASSWORD}
-            type={"password"}
+            type={FIELD_TYPES.PASSWORD}
           />
 
           <ForgotPassword />
