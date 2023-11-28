@@ -2,14 +2,14 @@
 import { Form, Formik } from 'formik';
 import { CustomUploadInput } from '@/components/CustomUploadInput';
 import { CustomTextArea } from '@/components/CustomTextArea';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { TRADER_URL } from '@/utils/variables';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikHelpers } from 'formik';
 
 const initialValues = {
   text: '',
-  file: '',
+  file: null,
 };
 
 export const CreateDealForm = () => {
@@ -19,7 +19,7 @@ export const CreateDealForm = () => {
   const accessToken = params.get('token');
 
   const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
-    const config = {
+    const config: AxiosRequestConfig = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
