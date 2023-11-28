@@ -1,9 +1,9 @@
 'use client';
 
-import { ChangeEvent, FC, FocusEvent, SyntheticEvent, useMemo, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Field, FormikContextType, useFormikContext } from 'formik';
-import { useDebouncedCallback } from 'use-debounce';
 import styles from './index.module.scss';
+import { clsx } from 'clsx';
 
 interface ICustomInput {
   label: string;
@@ -14,15 +14,10 @@ interface ICustomInput {
 }
 
 export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, field_Name, type = 'text', ...rest }) => {
-  const [value, setValue] = useState('');
   const { errors, setFieldValue }: FormikContextType<any> = useFormikContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(() => e.target.value);
-  };
-
-  const handleBlur = () => {
-    setFieldValue(field_Name, value);
+      setFieldValue(field_Name, e.target.value);
   };
 
   return (
@@ -30,17 +25,16 @@ export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, fi
       <label className={styles.label} htmlFor={field_Id}>
         {label}
       </label>
+
       <Field
-        className={styles.input}
-        value={value}
+        className={clsx({ error: errors[field_Name] })}
         name={field_Name}
         type={type}
         id={field_Id}
         placeholder={placeholder}
-        onBlur={handleBlur}
         onChange={handleChange}
       />
-      {errors && <span className={styles.error}>{errors[field_Name] as string}</span>}
+      {errors && <span className={'input_error'}>{errors[field_Name] as string}</span>}
     </div>
   );
 };

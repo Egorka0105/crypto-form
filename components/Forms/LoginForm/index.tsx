@@ -1,21 +1,21 @@
 'use client';
 
-import { FC } from 'react';
 import { Form, Formik } from 'formik';
-import { AUTH_URL, FIELD_NAMES } from '@/utils/variables';
+import { AUTH_URL, FIELD_NAMES, MOCK_LOGIN } from '@/utils/variables';
 import { login_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import { ForgotPassword } from '@/components/Modals';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
+import { clsx } from 'clsx';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.PASSWORD]: '',
 };
 
-export const LoginForm: FC = () => {
+export const LoginForm = () => {
   const router = useRouter();
 
   const handleSubmit = async (values: any) => {
@@ -29,27 +29,30 @@ export const LoginForm: FC = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={login_schema}>
-      <Form className={styles.login_form}>
-        <CustomInput
-          label={'Email'}
-          placeholder={'Email'}
-          field_Id={FIELD_NAMES.EMAIL}
-          field_Name={FIELD_NAMES.EMAIL}
-        />
+      {({ isValid }) => (
+        <Form className={styles.login_form}>
+          <CustomInput
+            label={MOCK_LOGIN.EMAIL_LABEL}
+            placeholder={MOCK_LOGIN.EMAIL_PLACEHOLDER}
+            field_Id={FIELD_NAMES.EMAIL}
+            field_Name={FIELD_NAMES.EMAIL}
+          />
 
-        <CustomInput
-          label={'Password'}
-          placeholder={'******'}
-          field_Id={FIELD_NAMES.PASSWORD}
-          field_Name={FIELD_NAMES.PASSWORD}
-        />
+          <CustomInput
+            label={MOCK_LOGIN.PASSWORD_LABEL}
+            placeholder={MOCK_LOGIN.PASSWORD_PLACEHOLDER}
+            field_Id={FIELD_NAMES.PASSWORD}
+            field_Name={FIELD_NAMES.PASSWORD}
+            type={"password"}
+          />
 
-        <ForgotPassword />
+          <ForgotPassword />
 
-        <button className={styles.submit} type={'submit'}>
-          submit
-        </button>
-      </Form>
+          <button className={clsx('submit_btn', styles.submit)} type={'submit'} disabled={!isValid}>
+            {MOCK_LOGIN.SUBMIT}
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };
