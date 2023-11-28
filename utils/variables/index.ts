@@ -17,3 +17,7 @@ export const AUTH_URL = {
   REFRESH: 'https://cryptobot-5rf4.onrender.com/crypto/enter/refresh-token',
   FORGOT: 'https://cryptobot-5rf4.onrender.com/crypto/enter/forgot-password',
 };
+
+export const TRADER_URL = {
+  CREATE_DEAL: "https://cryptobot-5rf4.onrender.com/crypto/trader/create-deal"
+}

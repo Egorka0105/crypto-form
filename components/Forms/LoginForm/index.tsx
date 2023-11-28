@@ -20,8 +20,8 @@ export const LoginForm: FC = () => {
 
   const handleSubmit = async (values: any) => {
     try {
-      const { status } = await axios.post(AUTH_URL.LOGIN, values);
-      if (status === 200) router.push('/profile');
+      const { status, data } = await axios.post(AUTH_URL.LOGIN, values);
+      if (status === 200) router.push(`/profile/create-deal?token=${data.accessToken}`);
     } catch (e: Error | any) {
       await Promise.reject(e);
     }
