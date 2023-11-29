@@ -6,8 +6,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { reset_password_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import axios from 'axios';
-import { clsx } from 'clsx';
-import styles from './index.module.scss';
 
 const initialValues = {
   [FIELD_NAMES.PASSWORD]: '',
@@ -42,7 +40,7 @@ export const ResetPasswordForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={reset_password_schema}>
       {({ isValid }) => (
-        <Form className={styles.form}>
+        <Form>
           <CustomInput
             label={MOCK_RESET_PASSWORD.PASSWORD_LABEL}
             placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
@@ -59,7 +57,7 @@ export const ResetPasswordForm = () => {
             type={FIELD_TYPES.PASSWORD}
           />
 
-          <button className={clsx('submit_btn', styles.submit)} type={'submit'} disabled={!isValid}>
+          <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
             {MOCK_RESET_PASSWORD.SUBMIT}
           </button>
         </Form>

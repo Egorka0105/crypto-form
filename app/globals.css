@@ -46,6 +46,7 @@ button {
 }
 
 form {
+    margin-top: 20px;
     max-width: 400px;
     width: 100%;
 }
@@ -93,6 +94,7 @@ input::placeholder {
 }
 
 .submit_btn {
+    margin-top: 20px;
     max-width: 400px;
     width: 100%;
     padding: 12px 120px;

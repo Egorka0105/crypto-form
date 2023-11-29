@@ -7,8 +7,6 @@ import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } fro
 import { useRouter } from 'next/navigation';
 import { admin_schema } from '@/utils/validations';
 import axios from 'axios';
-import { clsx } from 'clsx';
-import styles from './index.module.scss';
 
 const initAdminValues = {
   [FIELD_NAMES.FULL_NAME]: '',
@@ -32,7 +30,7 @@ export const SignUpAdminForm: FC = () => {
   return (
     <Formik initialValues={initAdminValues} onSubmit={handleSubmit} validationSchema={admin_schema}>
       {({ isValid }) => (
-        <Form className={styles.form}>
+        <Form>
           <CustomInput
             label={MOCK_INPUT_DATA.NAME.LABEL}
             placeholder={MOCK_INPUT_DATA.NAME.PLACEHOLDER}
@@ -63,7 +61,7 @@ export const SignUpAdminForm: FC = () => {
             type={FIELD_TYPES.PASSWORD}
           />
 
-          <button className={clsx('submit_btn', styles.submit)} type={'submit'} disabled={!isValid}>
+          <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
             {MOCK_SIGN_UP.SUBMIT}
           </button>
         </Form>

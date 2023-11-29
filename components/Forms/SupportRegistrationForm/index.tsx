@@ -1,39 +1,25 @@
 'use client';
 
-import { Form, Formik } from 'formik';
-import { trader_schema } from '@/utils/validations';
-import { CustomInput } from '@/components/CustomInput';
-import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { AUTH_URL, FIELD_NAMES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { support_schema } from '@/utils/validations';
+import { Form, Formik } from 'formik';
+import { CustomInput } from '@/components/CustomInput';
 
-const initTraderValues = {
+const initSupportValues = {
   [FIELD_NAMES.FULL_NAME]: '',
   [FIELD_NAMES.EMAIL]: '',
-  [FIELD_NAMES.TG_CHANNEL_NAME]: '',
   [FIELD_NAMES.PASSWORD]: '',
   [FIELD_NAMES.CONFIRM_PASSWORD]: '',
 };
 
-export const TraderRegistrationForm = () => {
+export const SupportRegistrationForm = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const params = new URLSearchParams(searchParams);
-  const registrationToken = params.get('token');
 
   const handleSubmit = async (value: any) => {
-    const reqValue = {
-      telegramChannelName: value[FIELD_NAMES.TG_CHANNEL_NAME],
-      registrationToken: registrationToken,
-      personDto: {
-        password: value[FIELD_NAMES.PASSWORD],
-        email: value[FIELD_NAMES.EMAIL],
-        fullName: value[FIELD_NAMES.FULL_NAME],
-      },
-    };
     try {
-      const { status } = await axios.post(AUTH_URL.REGISTRATION_TRADER, reqValue);
+      const { status } = await axios.post(AUTH_URL.REGISTRATION_SUPPORT, value);
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
       await Promise.reject(e);
@@ -41,7 +27,7 @@ export const TraderRegistrationForm = () => {
   };
 
   return (
-    <Formik initialValues={initTraderValues} onSubmit={handleSubmit} validationSchema={trader_schema}>
+    <Formik initialValues={initSupportValues} onSubmit={handleSubmit} validationSchema={support_schema}>
       {({ isValid }) => (
         <Form>
           <CustomInput
@@ -59,18 +45,10 @@ export const TraderRegistrationForm = () => {
           />
 
           <CustomInput
-            label={MOCK_INPUT_DATA.TELEGRAM.LABEL}
-            placeholder={MOCK_INPUT_DATA.TELEGRAM.PLACEHOLDER}
-            field_Id={FIELD_NAMES.TG_CHANNEL_NAME}
-            field_Name={FIELD_NAMES.TG_CHANNEL_NAME}
-          />
-
-          <CustomInput
             label={MOCK_INPUT_DATA.PASSWORD.LABEL}
             placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
             field_Id={FIELD_NAMES.PASSWORD}
             field_Name={FIELD_NAMES.PASSWORD}
-            type={FIELD_TYPES.PASSWORD}
           />
 
           <CustomInput
@@ -78,7 +56,6 @@ export const TraderRegistrationForm = () => {
             placeholder={MOCK_INPUT_DATA.CONFIRM_PASSWORD.PLACEHOLDER}
             field_Id={FIELD_NAMES.CONFIRM_PASSWORD}
             field_Name={FIELD_NAMES.CONFIRM_PASSWORD}
-            type={FIELD_TYPES.PASSWORD}
           />
 
           <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
