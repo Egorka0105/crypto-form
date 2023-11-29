@@ -1,0 +1,36 @@
+.wavy {
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+
+  span {
+    position: relative;
+    display: inline-block;
+    color: black;
+    font-size: 2em;
+    margin-top: 50%;
+    text-transform: uppercase;
+  }
+
+  @for $i from 1 through 10 {
+    .wave-#{$i} {
+      animation: animate 1s ease-in-out infinite;
+      animation-delay: calc(0.1s * #{$i});
+    }
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0px);
+    color: var(--white);
+    opacity: 0.2;
+  }
+  20% {
+    transform: translateY(-20px);
+    color: var(--light-blue);
+    opacity: 0.3;
+  }
+  40%, 100% {
+    transform: translateY(0px);
+  }
+}
