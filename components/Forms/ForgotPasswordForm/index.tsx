@@ -2,9 +2,9 @@
 
 import { ChangeEvent, useState } from 'react';
 import { email_schema } from '@/utils/validations';
-import { AUTH_URL, FIELD_NAMES } from '@/utils/variables';
+import { AUTH_URL, FIELD_NAMES, MOCK_FORGOT_PASSWORD, MOCK_INPUT_DATA } from '@/utils/variables';
 import axios from 'axios';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import styles from './index.module.scss';
 
 export const ForgotPasswordForm = () => {
@@ -23,8 +23,9 @@ export const ForgotPasswordForm = () => {
   };
 
   const handleSubmit = async () => {
+    const reqValue = { [FIELD_NAMES.RECIPIENT]: email };
     try {
-      const { status } = await axios.post(AUTH_URL.FORGOT, email);
+      const { status } = await axios.post(AUTH_URL.FORGOT, reqValue);
       if (status === 200) setFormSent(true);
     } catch (e) {
       await Promise.reject(e);
@@ -35,26 +36,29 @@ export const ForgotPasswordForm = () => {
     <>
       {!isFormSent && (
         <div className={styles.forgot_form}>
-          <label className={styles.label} htmlFor={FIELD_NAMES.RECIPIENT}>
-            Email
-          </label>
+          <label htmlFor={FIELD_NAMES.RECIPIENT}>{MOCK_INPUT_DATA.EMAIL.LABEL}</label>
           <input
-            className={clsx(styles.input, { [styles.input_error]: error })}
+            className={clsx({ error: error })}
             onChange={handleChange}
-            placeholder={'e.g. pespatron@trading.com'}
+            placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
             id={FIELD_NAMES.RECIPIENT}
           />
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <span className={'input_error'}>{error}</span>}
 
-          <button onClick={handleSubmit} className={styles.submit} type={'button'} disabled={!email || !!error}>
-            Confirm
+          <button
+            onClick={handleSubmit}
+            className={clsx('submit_btn', styles.submit)}
+            type={'button'}
+            disabled={!email || !!error}
+          >
+            {MOCK_FORGOT_PASSWORD.SUBMIT}
           </button>
         </div>
       )}
 
       {isFormSent && (
         <div>
-          <h2>A letter to change the password has been sent to the mail</h2>
+          <h4>A letter to change the password has been sent to the mail</h4>
         </div>
       )}
     </>

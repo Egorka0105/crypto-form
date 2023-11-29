@@ -22,7 +22,7 @@ export const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, title, chil
     <div onClick={handleBackgroundClick} className={styles.modal_template}>
       <div className={styles.modal}>
         <div className={styles.modal__head}>
-          <h2 className={styles.title}>{title}</h2>
+          <h4 className={styles.title}>{title}</h4>
 
           <button className={styles.close_button} onClick={() => onClose()} type="button">
             <Image src={'/icons/close-button.svg'} alt="close" width={34} height={34} />
