@@ -7,8 +7,6 @@ import { CustomInput } from '@/components/CustomInput';
 import { ForgotPassword } from '@/components/Modals';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { clsx } from 'clsx';
-import styles from './index.module.scss';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
@@ -30,7 +28,7 @@ export const LoginForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={login_schema}>
       {({ isValid }) => (
-        <Form className={styles.form}>
+        <Form>
           <CustomInput
             label={MOCK_INPUT_DATA.EMAIL.LABEL}
             placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
@@ -48,7 +46,7 @@ export const LoginForm = () => {
 
           <ForgotPassword />
 
-          <button className={clsx('submit_btn', styles.submit)} type={'submit'} disabled={!isValid}>
+          <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
             {MOCK_LOGIN.SUBMIT}
           </button>
         </Form>

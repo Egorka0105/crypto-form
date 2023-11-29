@@ -5,12 +5,11 @@ import { Formik, Form } from 'formik';
 import { CustomInput } from '@/components/CustomInput';
 import { trader_first_step_schema, trader_schema } from '@/utils/validations';
 import axios from 'axios';
+import { AUTH_URL } from '@/utils/variables';
 
 const initTraderValues = {
   recipient: '',
 };
-
-const post_link = 'https://cryptobot-5rf4.onrender.com/crypto/enter/sign-up/registration-link';
 
 export default function Page() {
   const [isSent, setIsSent] = useState(false);
@@ -18,7 +17,7 @@ export default function Page() {
 
   const handleSubmit = async (value: any) => {
     try {
-      const { status } = await axios.post(post_link, value);
+      const { status } = await axios.post(AUTH_URL.REGISTRATION_TRADER_PREPARATION, value);
       if (status === 200) setIsSent(true);
     } catch (e: Error | any) {
       setIsError(true);
@@ -37,21 +36,23 @@ export default function Page() {
               field_Id={'recipient'}
               field_Name={'recipient'}
             />
-            <button type={'submit'}>submit</button>
+            <button className={'submit_btn'} type={'submit'}>
+              submit
+            </button>
           </Form>
         </Formik>
       )}
       {isSent && (
         <div>
-          <h2>
+          <h4>
             The form has been sent successfully. A link for the 2nd stage of registration has been sent to your email.
-          </h2>
+          </h4>
         </div>
       )}
 
       {isError && (
         <div>
-          <h2>The registration link is no longer valid. You can register once using this link.</h2>
+          <h4>The registration link is no longer valid. You can register once using this link.</h4>
         </div>
       )}
     </div>

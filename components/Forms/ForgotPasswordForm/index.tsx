@@ -47,7 +47,7 @@ export const ForgotPasswordForm = () => {
 
           <button
             onClick={handleSubmit}
-            className={clsx('submit_btn', styles.submit)}
+            className={'submit_btn'}
             type={'button'}
             disabled={!email || !!error}
           >
