@@ -41,7 +41,7 @@ export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, fi
           id={field_Id}
           placeholder={placeholder}
           onChange={handleChange}
-          autocomplete="off"
+          autoComplete="off"
         />
 
         {(field_Name === FIELD_NAMES.PASSWORD || field_Name === FIELD_NAMES.CONFIRM_PASSWORD) && (
