@@ -16,7 +16,7 @@ export const ForgotPassword = () => {
       </button>
 
       {isOpen && (
-        <CustomModal title={'Forgot password'} onClose={handleModalClose} isOpen={isOpen}>
+        <CustomModal title={MOCK_FORGOT_PASSWORD.TITLE} onClose={handleModalClose} isOpen={isOpen}>
           <ForgotPasswordForm />
         </CustomModal>
       )}

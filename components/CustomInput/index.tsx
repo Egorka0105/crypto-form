@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, HTMLProps, useState } from 'react';
 import { Field, FormikContextType, useFormikContext } from 'formik';
 import { clsx } from 'clsx';
 import { CheckPasswordVisible } from '@/components/CheckPasswordVisible';

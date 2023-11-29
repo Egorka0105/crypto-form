@@ -1,7 +1,7 @@
 'use client';
 
 import { Form, Formik } from 'formik';
-import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_LOGIN } from '@/utils/variables';
+import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_LOGIN } from '@/utils/variables';
 import { login_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import { ForgotPassword } from '@/components/Modals';
@@ -32,15 +32,15 @@ export const LoginForm = () => {
       {({ isValid }) => (
         <Form className={styles.login_form}>
           <CustomInput
-            label={MOCK_LOGIN.EMAIL_LABEL}
-            placeholder={MOCK_LOGIN.EMAIL_PLACEHOLDER}
+            label={MOCK_INPUT_DATA.EMAIL.LABEL}
+            placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
             field_Id={FIELD_NAMES.EMAIL}
             field_Name={FIELD_NAMES.EMAIL}
           />
 
           <CustomInput
-            label={MOCK_LOGIN.PASSWORD_LABEL}
-            placeholder={MOCK_LOGIN.PASSWORD_PLACEHOLDER}
+            label={MOCK_INPUT_DATA.PASSWORD.LABEL}
+            placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
             field_Id={FIELD_NAMES.PASSWORD}
             field_Name={FIELD_NAMES.PASSWORD}
             type={FIELD_TYPES.PASSWORD}
