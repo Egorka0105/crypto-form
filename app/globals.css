@@ -94,6 +94,7 @@ input::placeholder {
 
 .submit_btn {
     max-width: 400px;
+    width: 100%;
     padding: 12px 120px;
     background-color: var(--light-blue);
     color: var(--white);
