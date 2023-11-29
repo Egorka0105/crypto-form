@@ -30,7 +30,7 @@ export const LoginForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={login_schema}>
       {({ isValid }) => (
-        <Form className={styles.login_form}>
+        <Form className={styles.form}>
           <CustomInput
             label={MOCK_INPUT_DATA.EMAIL.LABEL}
             placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}

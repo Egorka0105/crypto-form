@@ -1,38 +1,28 @@
 'use client';
 
+import { FC } from 'react';
 import { Formik, Form } from 'formik';
-import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_RESET_PASSWORD } from '@/utils/variables';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { reset_password_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
+import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
+import { useRouter } from 'next/navigation';
+import { admin_schema } from '@/utils/validations';
 import axios from 'axios';
 import { clsx } from 'clsx';
 import styles from './index.module.scss';
 
-const initialValues = {
+const initAdminValues = {
+  [FIELD_NAMES.FULL_NAME]: '',
+  [FIELD_NAMES.EMAIL]: '',
   [FIELD_NAMES.PASSWORD]: '',
   [FIELD_NAMES.CONFIRM_PASSWORD]: '',
 };
 
-export const ResetPasswordForm = () => {
+export const SignUpAdminForm: FC = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const accessToken = params.get('token');
 
-  const handleSubmit = async (values: any) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    const reqValue = {
-      newPassword: values[FIELD_NAMES.PASSWORD],
-    };
-
+  const handleSubmit = async (value: any) => {
     try {
-      const { status } = await axios.post(AUTH_URL.RESET, reqValue, config);
+      const { status } = await axios.post(AUTH_URL.REGISTRATION_ADMIN, value);
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
       await Promise.reject(e);
@@ -40,11 +30,25 @@ export const ResetPasswordForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={reset_password_schema}>
+    <Formik initialValues={initAdminValues} onSubmit={handleSubmit} validationSchema={admin_schema}>
       {({ isValid }) => (
         <Form className={styles.form}>
           <CustomInput
-            label={MOCK_RESET_PASSWORD.PASSWORD_LABEL}
+            label={MOCK_INPUT_DATA.NAME.LABEL}
+            placeholder={MOCK_INPUT_DATA.NAME.PLACEHOLDER}
+            field_Id={FIELD_NAMES.FULL_NAME}
+            field_Name={FIELD_NAMES.FULL_NAME}
+          />
+
+          <CustomInput
+            label={MOCK_INPUT_DATA.EMAIL.LABEL}
+            placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
+            field_Id={FIELD_NAMES.EMAIL}
+            field_Name={FIELD_NAMES.EMAIL}
+          />
+
+          <CustomInput
+            label={MOCK_INPUT_DATA.PASSWORD.LABEL}
             placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
             field_Id={FIELD_NAMES.PASSWORD}
             field_Name={FIELD_NAMES.PASSWORD}
@@ -60,7 +64,7 @@ export const ResetPasswordForm = () => {
           />
 
           <button className={clsx('submit_btn', styles.submit)} type={'submit'} disabled={!isValid}>
-            {MOCK_RESET_PASSWORD.SUBMIT}
+            {MOCK_SIGN_UP.SUBMIT}
           </button>
         </Form>
       )}
