@@ -55,3 +55,7 @@ export const reset_password_schema: any = yup.object().shape({
   [FIELD_NAMES.PASSWORD]: password_schema,
   [FIELD_NAMES.CONFIRM_PASSWORD]: password_confirm_schema,
 });
+
+export const create_deal_schema: any = yup.object().shape({
+  [FIELD_NAMES.TEXT]: yup.string().required('Field is required'),
+});

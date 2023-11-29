@@ -58,6 +58,30 @@ label {
     line-height: 20px;
 }
 
+textarea {
+    padding: 14px 16px;
+    max-width: 400px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--gray);
+    outline: none;
+}
+
+textarea::placeholder {
+    color: var(--gray);
+}
+
+textarea:focus {
+    border-color: var(--light-blue);
+}
+
+textarea.error{
+    border-color: var(--input-error);
+}
+
 input {
     padding: 14px 16px;
     max-width: 400px;

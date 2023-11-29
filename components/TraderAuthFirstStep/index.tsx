@@ -1,10 +1,9 @@
 'use client';
 
-import { FC, Suspense, useState } from 'react';
+import { FC, useState } from 'react';
 import { CustomEmailForm } from '@/components/Forms/CustomEmailForm';
 import { AUTH_URL, MOCK_SIGN_UP } from '@/utils/variables';
 import s from './index.module.scss';
-import {Loader} from "@/components";
 
 export const TraderAuthFirstStep: FC = () => {
   const [responseStatus, setResponseStatus] = useState({ isSend: false, isError: false });
@@ -16,15 +15,13 @@ export const TraderAuthFirstStep: FC = () => {
 
   return (
     <>
-      <Suspense fallback={<Loader />}>
-        {!responseStatus.isSend && !responseStatus.isError && (
-          <CustomEmailForm
-            setFormSent={handleFormSent}
-            submitText={MOCK_SIGN_UP.SUBMIT}
-            apiLink={AUTH_URL.REGISTRATION_TRADER_PREPARATION}
-          />
-        )}
-      </Suspense>
+      {!responseStatus.isSend && !responseStatus.isError && (
+        <CustomEmailForm
+          setFormSent={handleFormSent}
+          submitText={MOCK_SIGN_UP.SUBMIT}
+          apiLink={AUTH_URL.REGISTRATION_TRADER_PREPARATION}
+        />
+      )}
 
       {responseStatus.isSend && (
         <div className={s.status_wrapper}>
