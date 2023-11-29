@@ -1,0 +1,26 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .notFound_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .notFound_title {
+      color: var(--white);
+      text-align: center;
+    }
+  }
+
+  a {
+    text-align: center;
+  }
+}
