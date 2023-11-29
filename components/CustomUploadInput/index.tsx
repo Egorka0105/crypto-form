@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FormikContextType, useFormikContext } from 'formik';
+import { Field, FormikContextType, useFormikContext } from 'formik';
 
 interface ICustomUploadInput {
   label: string;
@@ -13,13 +13,14 @@ export const CustomUploadInput: FC<ICustomUploadInput> = ({ label, field_Id, fie
 
   const handleChange = (event: any) => {
     const file = event.target.files[0];
+    console.log(file);
     setFieldValue(field_Name, file);
   };
 
   return (
     <div>
       <label htmlFor={field_Id}>{label}</label>
-      <input id={field_Id} name={field_Name} type={type} accept="image/*" onChange={handleChange} />
+      <Field id={field_Id} name={field_Name} type={type} accept="image/*" onChange={handleChange} />
     </div>
   );
 };

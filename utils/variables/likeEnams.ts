@@ -5,6 +5,9 @@ export const FIELD_NAMES = {
   CONFIRM_PASSWORD: 'confirm-password',
   TG_CHANNEL_NAME: 'telegramChannelName',
   RECIPIENT: 'recipient',
+
+  TEXT: 'text',
+  FILE: 'file',
 };
 
 export const FIELD_TYPES = {

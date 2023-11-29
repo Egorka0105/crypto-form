@@ -1,5 +1,7 @@
-import { ChangeEvent, ChangeEventHandler, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { FormikContextType, useFormikContext } from 'formik';
+import { clsx } from 'clsx';
+import s from './index.module.scss';
 
 interface ICustomTextArea {
   label: string;
@@ -29,9 +31,10 @@ export const CustomTextArea: FC<ICustomTextArea> = ({
   };
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <label htmlFor={field_Id}>{label}</label>
       <textarea
+        className={clsx(s.textArea, { error: errors })}
         value={value}
         id={field_Id}
         name={field_Name}
@@ -39,6 +42,8 @@ export const CustomTextArea: FC<ICustomTextArea> = ({
         placeholder={placeholder}
         onBlur={handleBlur}
       />
+
+      {errors && <span className={'input_error'}>{errors['text'] as string}</span>}
     </div>
   );
 };
