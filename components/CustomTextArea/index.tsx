@@ -34,7 +34,7 @@ export const CustomTextArea: FC<ICustomTextArea> = ({
     <div className={s.wrapper}>
       <label htmlFor={field_Id}>{label}</label>
       <textarea
-        className={clsx(s.textArea, { error: errors })}
+        className={clsx(s.textArea, { error: errors[field_Name] })}
         value={value}
         id={field_Id}
         name={field_Name}

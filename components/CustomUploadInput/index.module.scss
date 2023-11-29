@@ -1,0 +1,53 @@
+.upload_wrapper {
+  position: relative;
+
+  .input {
+    display: none;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    padding: 14px 16px;
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--white);
+    border: 1px solid var(--light-blue);
+    border-radius: 4px;
+    margin: 8px 0;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+
+    .label {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--black);
+    }
+
+    .image_name {
+      flex-grow: 1;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16px;
+      text-align: left;
+      color: var(--dark-gray);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .image_size {
+      padding: 4px 8px;
+      border: 1px solid var(--gray);
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 12px;
+    }
+  }
+}
