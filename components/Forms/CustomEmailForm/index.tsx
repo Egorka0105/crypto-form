@@ -10,12 +10,12 @@ import axios from 'axios';
 import { Loader } from '@/components/Loader';
 
 interface ICustomEmailFormProps {
-  setFormSent: (status: number) => void;
+  handleFormSent: (status: number) => void;
   submitText: string;
   apiLink: string;
 }
 
-export const CustomEmailForm: FC<ICustomEmailFormProps> = ({ setFormSent, submitText, apiLink }) => {
+export const CustomEmailForm: FC<ICustomEmailFormProps> = ({ handleFormSent, submitText, apiLink }) => {
   const [email, setEmail] = useState('');
   const [error, serError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,9 +35,9 @@ export const CustomEmailForm: FC<ICustomEmailFormProps> = ({ setFormSent, submit
     const reqValue = { [FIELD_NAMES.RECIPIENT]: email };
     try {
       const { status } = await axios.post(apiLink, reqValue);
-      if (status === 200) setFormSent(status);
+      if (status === 200) handleFormSent(status);
     } catch (e: any) {
-      setFormSent(e.status);
+      handleFormSent(e.status);
       await Promise.reject(e);
     } finally {
       setLoading(false);

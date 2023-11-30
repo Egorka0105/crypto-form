@@ -4,7 +4,7 @@ import { Loader } from '@/components';
 
 export default function CreateDeal() {
   return (
-    <div className={"form_container"}>
+    <div className={'form_container'}>
       <h2>Create a deal</h2>
       <Suspense fallback={<Loader />}>
         <CreateDealForm />

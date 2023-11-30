@@ -6,6 +6,8 @@ import { CustomInput } from '@/components/CustomInput';
 import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
+import { useState } from 'react';
+import { Loader } from '@/components';
 
 const initTraderValues = {
   [FIELD_NAMES.FULL_NAME]: '',
@@ -16,6 +18,7 @@ const initTraderValues = {
 };
 
 export const TraderRegistrationForm = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -23,6 +26,7 @@ export const TraderRegistrationForm = () => {
   const registrationToken = params.get('token');
 
   const handleSubmit = async (value: any) => {
+    setLoading(true);
     const reqValue = {
       telegramChannelName: value[FIELD_NAMES.TG_CHANNEL_NAME],
       registrationToken: registrationToken,
@@ -37,55 +41,63 @@ export const TraderRegistrationForm = () => {
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
       await Promise.reject(e);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Formik initialValues={initTraderValues} onSubmit={handleSubmit} validationSchema={trader_schema}>
-      {({ isValid }) => (
-        <Form>
-          <CustomInput
-            label={MOCK_INPUT_DATA.NAME.LABEL}
-            placeholder={MOCK_INPUT_DATA.NAME.PLACEHOLDER}
-            field_Id={FIELD_NAMES.FULL_NAME}
-            field_Name={FIELD_NAMES.FULL_NAME}
-          />
+    <>
+      {!loading ? (
+        <Formik initialValues={initTraderValues} onSubmit={handleSubmit} validationSchema={trader_schema}>
+          {({ isValid }) => (
+            <Form>
+              <CustomInput
+                label={MOCK_INPUT_DATA.NAME.LABEL}
+                placeholder={MOCK_INPUT_DATA.NAME.PLACEHOLDER}
+                field_Id={FIELD_NAMES.FULL_NAME}
+                field_Name={FIELD_NAMES.FULL_NAME}
+              />
 
-          <CustomInput
-            label={MOCK_INPUT_DATA.EMAIL.LABEL}
-            placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
-            field_Id={FIELD_NAMES.EMAIL}
-            field_Name={FIELD_NAMES.EMAIL}
-          />
+              <CustomInput
+                label={MOCK_INPUT_DATA.EMAIL.LABEL}
+                placeholder={MOCK_INPUT_DATA.EMAIL.PLACEHOLDER}
+                field_Id={FIELD_NAMES.EMAIL}
+                field_Name={FIELD_NAMES.EMAIL}
+              />
 
-          <CustomInput
-            label={MOCK_INPUT_DATA.TELEGRAM.LABEL}
-            placeholder={MOCK_INPUT_DATA.TELEGRAM.PLACEHOLDER}
-            field_Id={FIELD_NAMES.TG_CHANNEL_NAME}
-            field_Name={FIELD_NAMES.TG_CHANNEL_NAME}
-          />
+              <CustomInput
+                label={MOCK_INPUT_DATA.TELEGRAM.LABEL}
+                placeholder={MOCK_INPUT_DATA.TELEGRAM.PLACEHOLDER}
+                field_Id={FIELD_NAMES.TG_CHANNEL_NAME}
+                field_Name={FIELD_NAMES.TG_CHANNEL_NAME}
+              />
 
-          <CustomInput
-            label={MOCK_INPUT_DATA.PASSWORD.LABEL}
-            placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
-            field_Id={FIELD_NAMES.PASSWORD}
-            field_Name={FIELD_NAMES.PASSWORD}
-            type={FIELD_TYPES.PASSWORD}
-          />
+              <CustomInput
+                label={MOCK_INPUT_DATA.PASSWORD.LABEL}
+                placeholder={MOCK_INPUT_DATA.PASSWORD.PLACEHOLDER}
+                field_Id={FIELD_NAMES.PASSWORD}
+                field_Name={FIELD_NAMES.PASSWORD}
+                type={FIELD_TYPES.PASSWORD}
+              />
 
-          <CustomInput
-            label={MOCK_INPUT_DATA.CONFIRM_PASSWORD.LABEL}
-            placeholder={MOCK_INPUT_DATA.CONFIRM_PASSWORD.PLACEHOLDER}
-            field_Id={FIELD_NAMES.CONFIRM_PASSWORD}
-            field_Name={FIELD_NAMES.CONFIRM_PASSWORD}
-            type={FIELD_TYPES.PASSWORD}
-          />
+              <CustomInput
+                label={MOCK_INPUT_DATA.CONFIRM_PASSWORD.LABEL}
+                placeholder={MOCK_INPUT_DATA.CONFIRM_PASSWORD.PLACEHOLDER}
+                field_Id={FIELD_NAMES.CONFIRM_PASSWORD}
+                field_Name={FIELD_NAMES.CONFIRM_PASSWORD}
+                type={FIELD_TYPES.PASSWORD}
+              />
 
-          <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
-            {MOCK_SIGN_UP.SUBMIT}
-          </button>
-        </Form>
+              <button className={'submit_btn'} type={'submit'} disabled={!isValid}>
+                {MOCK_SIGN_UP.SUBMIT}
+              </button>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <Loader />
       )}
-    </Formik>
+    </>
   );
 };
