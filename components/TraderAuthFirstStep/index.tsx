@@ -17,7 +17,7 @@ export const TraderAuthFirstStep: FC = () => {
     <>
       {!responseStatus.isSend && !responseStatus.isError && (
         <CustomEmailForm
-          setFormSent={handleFormSent}
+          handleFormSent={handleFormSent}
           submitText={MOCK_SIGN_UP.SUBMIT}
           apiLink={AUTH_URL.REGISTRATION_TRADER_PREPARATION}
         />
