@@ -8,6 +8,8 @@ export const FIELD_NAMES = {
 
   TEXT: 'text',
   FILE: 'file',
+
+  DEPOSIT_AMOUNT: ""
 };
 
 export const FIELD_TYPES = {

@@ -1,0 +1,25 @@
+.qr_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  &__link {
+    margin-top: 8px;
+  }
+
+  &__link_description {
+    margin-top: 8px;
+  }
+}
+
+.payment_test__confirm_btn {
+  margin-top: 10px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  background: var(--light-blue);
+  color: var(--white);
+  border-radius: 4px;
+  padding: 10px;
+}

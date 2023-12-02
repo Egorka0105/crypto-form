@@ -59,3 +59,9 @@ export const reset_password_schema: any = yup.object().shape({
 export const create_deal_schema: any = yup.object().shape({
   [FIELD_NAMES.TEXT]: yup.string().required('Field is required'),
 });
+
+// export const amount_schema: any = yup.object().shape({
+//   [FIELD_NAMES.DEPOSIT_AMOUNT]: yup.number().min(0).required('Field is required'),
+// });
+
+export const amount_schema: any = yup.number().min(0, "min value is 0").required('Field is required');
