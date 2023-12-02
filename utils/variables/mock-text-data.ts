@@ -19,6 +19,10 @@ export const MOCK_INPUT_DATA = {
     LABEL: 'Confirm password',
     PLACEHOLDER: 'Enter your password',
   },
+  DEPOSIT_AMOUNT: {
+    LABEL: 'Your deposit',
+    PLACEHOLDER: 'Enter your deposit',
+  }
 };
 
 export const MOCK_LOGIN = {
