@@ -49,7 +49,7 @@ export const AmountForm = () => {
   }, [amount, userId]);
   return (
     <>
-      {!loading && !isFormSend ? (
+      {!loading && !isFormSend && (
         <div className={styles.form}>
           <label htmlFor={FIELD_NAMES.DEPOSIT_AMOUNT}>{MOCK_INPUT_DATA.DEPOSIT_AMOUNT.LABEL}</label>
           <input
@@ -62,16 +62,16 @@ export const AmountForm = () => {
           {error && <span className={'input_error'}>{error}</span>}
 
           <button onClick={handleSubmit} className={'submit_btn'} type={'button'} disabled={!amount || !!error}>
-            Send
+            Отправить
           </button>
         </div>
-      ) : (
-        <Loader />
       )}
+
+      {loading && <Loader />}
 
       {isFormSend && (
         <div>
-          <p>Form was sent</p>
+          <p>Данные успешно отправлены</p>
         </div>
       )}
     </>

@@ -20,8 +20,8 @@ export const MOCK_INPUT_DATA = {
     PLACEHOLDER: 'Enter your password',
   },
   DEPOSIT_AMOUNT: {
-    LABEL: 'Your deposit',
-    PLACEHOLDER: 'Enter your deposit',
+    LABEL: 'Ваш депозит',
+    PLACEHOLDER: 'Введите депозит',
   }
 };
 

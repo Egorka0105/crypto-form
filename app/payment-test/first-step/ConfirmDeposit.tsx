@@ -12,7 +12,7 @@ export const ConfirmDeposit = () => {
 
     return (
         <Link className={'payment_test__confirm_btn'} href={`/payment-test/second-step?userId=${userId}`}>
-            Confirm the payment
+            Подтвердить платеж
         </Link>
     );
 };
