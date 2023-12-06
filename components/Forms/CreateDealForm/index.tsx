@@ -10,6 +10,7 @@ import { FormikHelpers } from 'formik';
 import { create_deal_schema } from '@/utils/validations';
 import { useState } from 'react';
 import { Loader } from '@/components';
+import { toastMessage } from '@/utils/helpers';
 
 const initialValues = {
   [FIELD_NAMES.TEXT]: '',
@@ -37,11 +38,14 @@ export const CreateDealForm = () => {
       formData.append(FIELD_NAMES.FILE, values.file);
       formData.append(FIELD_NAMES.TEXT, values.text);
       const { status } = await axios.post(TRADER_URL.CREATE_DEAL, formData, config);
-      if (status === 200) resetForm();
+      if (status === 200) await toastMessage('Data sent successfully', 'success');
     } catch (e: any) {
-      if (e.status === 500) alert('server error 500');
-      if (e.status === 403 || e.status === 500) router.push('/login');
-      await Promise.reject(e);
+      if (e.response.status === 403) {
+        await toastMessage(`${e.response.status} Token invalid`, 'error');
+        await router.push('/login');
+      } else {
+        await toastMessage(`${e.response.status} We have a problem`, 'error');
+      }
     } finally {
       setLoading(false);
     }
@@ -49,7 +53,7 @@ export const CreateDealForm = () => {
 
   return (
     <>
-      {!loading && !isFormSend && (
+      {!loading ? (
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={create_deal_schema}>
           {({ isValid }) => (
             <Form>
@@ -61,17 +65,8 @@ export const CreateDealForm = () => {
             </Form>
           )}
         </Formik>
-      )}
-
-      {loading && <Loader />}
-
-      {isFormSend && (
-        <div>
-          <p>Data sent successfully</p>
-          <button onClick={() => setFormSend(false)} className={'submit_btn'}>
-            Create new
-          </button>
-        </div>
+      ) : (
+        <Loader />
       )}
     </>
   );
