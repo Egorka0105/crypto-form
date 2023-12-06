@@ -19,7 +19,6 @@ const initialValues = {
 
 export const CreateDealForm = () => {
   const [loading, setLoading] = useState(false);
-  const [isFormSend, setFormSend] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -35,8 +34,8 @@ export const CreateDealForm = () => {
     };
     try {
       const formData = new FormData();
-      formData.append(FIELD_NAMES.FILE, values.file);
       formData.append(FIELD_NAMES.TEXT, values.text);
+      values.file && formData.append(FIELD_NAMES.FILE, values.file);
       const { status } = await axios.post(TRADER_URL.CREATE_DEAL, formData, config);
       if (status === 200) await toastMessage('Data sent successfully', 'success');
     } catch (e: any) {
