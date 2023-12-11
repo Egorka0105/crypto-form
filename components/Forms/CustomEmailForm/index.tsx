@@ -6,8 +6,8 @@ import styles from './index.module.scss';
 import { FIELD_NAMES, MOCK_FORGOT_PASSWORD, MOCK_INPUT_DATA } from '@/utils/variables';
 import { clsx } from 'clsx';
 import { email_schema } from '@/utils/validations';
-import axios from 'axios';
 import { Loader } from '@/components/Loader';
+import { API } from '@/utils/api';
 
 interface ICustomEmailFormProps {
   handleFormSent: (status: number) => void;
@@ -34,7 +34,7 @@ export const CustomEmailForm: FC<ICustomEmailFormProps> = ({ handleFormSent, sub
     setLoading(true);
     const reqValue = { [FIELD_NAMES.RECIPIENT]: email };
     try {
-      const { status } = await axios.post(apiLink, reqValue);
+      const { status } = await API.post(apiLink, reqValue);
       if (status === 200) handleFormSent(status);
     } catch (e: any) {
       handleFormSent(e.status);
@@ -57,8 +57,10 @@ export const CustomEmailForm: FC<ICustomEmailFormProps> = ({ handleFormSent, sub
           />
           {error && <span className={'input_error'}>{error}</span>}
 
+
+
           <button onClick={handleSubmit} className={'submit_btn'} type={'button'} disabled={!email || !!error}>
-            {submitText}
+            Send
           </button>
         </div>
       ) : (

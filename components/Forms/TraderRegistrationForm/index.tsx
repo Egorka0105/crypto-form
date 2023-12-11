@@ -5,9 +5,9 @@ import { trader_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
 import { useRouter, useSearchParams } from 'next/navigation';
-import axios from 'axios';
 import { useState } from 'react';
 import { Loader } from '@/components';
+import { API } from '@/utils/api';
 
 const initTraderValues = {
   [FIELD_NAMES.FULL_NAME]: '',
@@ -24,12 +24,14 @@ export const TraderRegistrationForm = () => {
 
   const params = new URLSearchParams(searchParams);
   const registrationToken = params.get('token');
+  const traderType = params.get('traderType');
 
   const handleSubmit = async (value: any) => {
     setLoading(true);
     const reqValue = {
       telegramChannelName: value[FIELD_NAMES.TG_CHANNEL_NAME],
       registrationToken: registrationToken,
+      [FIELD_NAMES.TRADER_TYPE]: traderType,
       personDto: {
         password: value[FIELD_NAMES.PASSWORD],
         email: value[FIELD_NAMES.EMAIL],
@@ -37,7 +39,7 @@ export const TraderRegistrationForm = () => {
       },
     };
     try {
-      const { status } = await axios.post(AUTH_URL.REGISTRATION_TRADER, reqValue);
+      const { status } = await API.post(AUTH_URL.REGISTRATION_TRADER, reqValue);
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
       await Promise.reject(e);

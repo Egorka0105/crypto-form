@@ -11,6 +11,7 @@ import { create_deal_schema } from '@/utils/validations';
 import { useState } from 'react';
 import { Loader } from '@/components';
 import { toastMessage } from '@/utils/helpers';
+import { API } from '@/utils/api';
 
 const initialValues = {
   [FIELD_NAMES.TEXT]: '',
@@ -20,23 +21,21 @@ const initialValues = {
 export const CreateDealForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const accessToken = params.get('token');
 
   const handleSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
     setLoading(true);
     const config: AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         'Content-type': 'multipart/form-data',
       },
     };
     try {
       const formData = new FormData();
       formData.append(FIELD_NAMES.TEXT, values.text);
+      formData.append('dealAnnouncementId', 52 as any);
       values.file && formData.append(FIELD_NAMES.FILE, values.file);
-      const { status } = await axios.post(TRADER_URL.CREATE_DEAL, formData, config);
+      const { status, data } = await API.post(TRADER_URL.CREATE_DEAL, formData, config);
+      console.log('data', data);
       if (status === 200) await toastMessage('Data sent successfully', 'success');
     } catch (e: any) {
       if (e.response.status === 403) {

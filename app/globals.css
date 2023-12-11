@@ -10,6 +10,8 @@
     --black: #000000;
     --dark-gray: #222D39;
     --input-error: #FF3B30;
+
+    --light-gray: #BFC2C5;
 }
 
 * {
@@ -49,6 +51,17 @@ button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+select {
+    cursor: pointer;
+    padding: 14px 16px;
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    margin: 8px 0;
 }
 
 form {

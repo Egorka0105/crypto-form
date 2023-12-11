@@ -49,7 +49,7 @@ export const CustomInput: FC<ICustomInput> = ({ label, placeholder, field_Id, fi
         )}
       </div>
 
-      {errors && <span className={'input_error'}>{errors[field_Name] as string}</span>}
+      {errors[field_Name] && <span className={'input_error'}>{errors[field_Name] as string}</span>}
     </div>
   );
 };

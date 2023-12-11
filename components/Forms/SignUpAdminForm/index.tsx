@@ -6,8 +6,8 @@ import { CustomInput } from '@/components/CustomInput';
 import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_SIGN_UP } from '@/utils/variables';
 import { useRouter } from 'next/navigation';
 import { admin_schema } from '@/utils/validations';
-import axios from 'axios';
 import { Loader } from '@/components';
+import { API } from '@/utils/api';
 
 const initAdminValues = {
   [FIELD_NAMES.FULL_NAME]: '',
@@ -23,12 +23,11 @@ export const SignUpAdminForm: FC = () => {
   const handleSubmit = async (value: any) => {
     setLoading(true);
     try {
-      const { status } = await axios.post(AUTH_URL.REGISTRATION_ADMIN, value);
+      const { status } = await API.post(AUTH_URL.REGISTRATION_ADMIN, value);
       if (status === 200) router.push('/login');
     } catch (e: Error | any) {
-      await Promise.reject(e);
-    } finally {
       setLoading(false);
+      await Promise.reject(e);
     }
   };
 

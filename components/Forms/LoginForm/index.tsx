@@ -2,13 +2,21 @@
 
 import { useState } from 'react';
 import { Form, Formik } from 'formik';
-import { AUTH_URL, FIELD_NAMES, FIELD_TYPES, MOCK_INPUT_DATA, MOCK_LOGIN } from '@/utils/variables';
+import {
+  AUTH_URL,
+  FIELD_NAMES,
+  FIELD_TYPES,
+  MOCK_INPUT_DATA,
+  MOCK_LOGIN,
+  STORAGE_SERVICE_KEYS,
+} from '@/utils/variables';
 import { login_schema } from '@/utils/validations';
 import { CustomInput } from '@/components/CustomInput';
 import { ForgotPassword } from '@/components/Modals';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Loader } from '@/components';
+import { storageService } from '@/utils/services';
+import axios from 'axios';
 
 const initialValues = {
   [FIELD_NAMES.EMAIL]: '',
@@ -22,7 +30,13 @@ export const LoginForm = () => {
   const handleSubmit = async (values: any) => {
     setLoading(true);
     try {
-      const { status, data } = await axios.post(AUTH_URL.LOGIN, values);
+      const { status, data } = await axios.post(`${process.env['NEXT_PUBLIC_API_URL']}${AUTH_URL.LOGIN}`, values);
+
+      storageService.setItem(STORAGE_SERVICE_KEYS.ACCESS_TOKEN, data.accessToken);
+      storageService.setItem(STORAGE_SERVICE_KEYS.REFRESH_TOKEN, data.refreshToken);
+      console.log('status', status);
+      console.log('data', data);
+
       if (status === 200) router.push(`/profile/create-deal?token=${data.accessToken}`);
     } catch (e: Error | any) {
       await Promise.reject(e);
